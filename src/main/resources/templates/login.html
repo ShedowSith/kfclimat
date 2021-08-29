@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/login}" th:object="${loginForm}" method="POST">
+    <p>Кто вы?</p>
+    <div th:each="type : ${T(ru.rahimyanov_aleks.KFClimat.pojo.TypeLogin).values()}">
+        <div>
+            <input type="radio" th:field="*{typeLogin}" th:value="${type}" class="custom-control-input">
+            <label th:for="${#ids.prev('typeLogin')}" th:text="${type.getDisplayValue()}"></label>
+        </div>
+    </div>
+
+    <p>Ваш email:
+        <input type="text" th:field="*{email}" size="15" maxlength="30">
+    </p>
+    <p>Пароль: <input type="password" th:field="*{password}" size="15" maxlength="30"></p>
+    <input type="submit">
+</form>
+</body>
+</html>

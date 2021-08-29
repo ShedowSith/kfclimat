@@ -19,7 +19,4 @@ public class User {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ROLE_ID")
-    private Role role;
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Регистрация</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<p>Кто вы?</p>
+<input type="radio" name="type" value="client" checked><label>Клиент</label>
+<input type="radio" name="type" value="master"><label>Мастер</label>
+
+
+  <form id="form_registry_client" action="#" th:action="@{/registration/client}" th:object="${client}" method="POST">
+      <p>Фамилия:<input type="text" th:field="*{surname}" size="15" maxlength="30"></p>
+      <p>Имя:<input type="text"  th:field="*{name}" size="15" maxlength="30"></p>
+      <p>Отчество:<input type="text"  th:field="*{patronymic}" size="15" maxlength="30"></p>
+      <p>Email: <input type="text"  th:field="*{email}" size="15" maxlength="30"></p>
+      <p>Пароль: <input type="password"  th:field="*{password}" size="15" maxlength="30"></p>
+
+    <input type="submit">
+  </form>
+<form id="form_registry_master" style='display:none' action="#" th:action="@{/registration/master}" th:object="${master}" method="POST">
+    <p>Фамилия:<input type="text" th:field="*{surname}" size="15" maxlength="30"></p>
+    <p>Имя:<input type="text"  th:field="*{name}" size="15" maxlength="30"></p>
+    <p>Отчество:<input type="text"  th:field="*{patronymic}" size="15" maxlength="30"></p>
+    <p>Email: <input type="text"  th:field="*{email}" size="15" maxlength="30"></p>
+    <p>Пароль: <input type="password"  th:field="*{password}" size="15" maxlength="30"></p>
+    <p>Название бригады:<input type="text" th:field="*{brigade}" size="15" maxlength="30"></p>
+    <p>О себе:</p>
+    <textarea th:field="*{descriptions}"></textarea>
+
+    <input type="submit">
+</form>
+
+</body>
+<script>
+    $(document).ready(function() {
+        $('input[type="radio"]').click(function() {
+            if($(this).attr('value') == 'master') {
+                $('#form_registry_master').show();
+                $('#form_registry_client').hide();
+            }
+
+            else {
+                $('#form_registry_client').show();
+                $('#form_registry_master').hide();
+            }
+        });
+    });
+
+</script>
+</html>

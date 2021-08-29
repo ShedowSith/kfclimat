@@ -14,8 +14,14 @@ public class Client {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "NAME")
+    @Column(name = "SURNAME", nullable = false)
+    private String surname;
+
+    @Column(name = "NAME", nullable = false)
     private String name;
+
+    @Column(name = "PATRONYMIC")
+    private String patronymic;
 
     @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
