@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 
 @Data
 @Entity(name = "MASTERS")
@@ -37,4 +38,17 @@ public class Master {
 
     @OneToMany(mappedBy = "master", fetch = FetchType.EAGER)
     private Collection<Response> responses;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Master master = (Master) o;
+        return id.equals(master.id) && surname.equals(master.surname) && name.equals(master.name) && Objects.equals(patronymic, master.patronymic) && email.equals(master.email) && password.equals(master.password) && brigade.equals(master.brigade) && Objects.equals(descriptions, master.descriptions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, surname, name, patronymic, email, password, brigade, descriptions);
+    }
 }

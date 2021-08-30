@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -32,4 +33,16 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Collection<Application> applications;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return id.equals(client.id) && surname.equals(client.surname) && name.equals(client.name) && Objects.equals(patronymic, client.patronymic) && email.equals(client.email) && password.equals(client.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, surname, name, patronymic, email, password);
+    }
 }

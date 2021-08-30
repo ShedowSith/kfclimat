@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface ClientRepository extends CrudRepository<Client, Long> {
-    List<Client> findAllBy();
+    List<Client> findAll();
     Optional<Client> findClientByEmailAndPassword(String email, String password);
 }

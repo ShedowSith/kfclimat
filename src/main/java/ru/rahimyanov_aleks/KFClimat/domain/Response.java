@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Data
 @Entity(name = "RESPONSES")
@@ -28,4 +29,16 @@ public class Response {
     @JoinColumn(name = "APPLICATION_AD")
     private Application application;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Response response = (Response) o;
+        return id.equals(response.id) && price.equals(response.price) && date.equals(response.date) && master.equals(response.master) && application.equals(response.application);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, price, date, master, application);
+    }
 }

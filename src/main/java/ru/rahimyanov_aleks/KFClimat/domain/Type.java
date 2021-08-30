@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 
 @Data
 @Entity(name = "Types")
@@ -19,4 +20,17 @@ public class Type {
 
     @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
     private Collection<Application> applications;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Type type = (Type) o;
+        return id.equals(type.id) && name.equals(type.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
 }
