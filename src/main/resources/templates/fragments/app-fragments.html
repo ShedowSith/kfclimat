@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>App Fragments</title>
+</head>
+<body>
+<!-- Admin Navigator -->
+
+<ul th:fragment = "nav-admin">
+
+</ul>
+
+<!-- Client Navigator -->
+
+<ul th:fragment = "nav-client">
+    <li><a th:href="@{/client/applications}">Мои заявки</a></li>
+    <li><a th:href="@{/client/application}">Подать заявку</a></li>
+</ul>
+
+<!-- Master Navigator -->
+
+<ul th:fragment = "nav-master">
+    <li><a th:href="@{/master/applications}">Заявки</a></li>
+    <li><a th:href="@{/master/responses}">Мои отклики</a></li>
+    <li><a th:href="@{/master/history}">История</a></li>
+    <li><a th:href="@{/master/profile}">Профиль</a></li>
+</ul>
+
+
+<div th:fragment="footer">
+    &copy;2021 Моя почта - rahimyanov_aleks@mail.ru
+</div>
+
+
+
+</body>
+</html>

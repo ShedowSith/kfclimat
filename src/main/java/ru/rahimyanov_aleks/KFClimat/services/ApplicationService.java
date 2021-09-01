@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rahimyanov_aleks.KFClimat.domain.Application;
+import ru.rahimyanov_aleks.KFClimat.domain.Client;
 import ru.rahimyanov_aleks.KFClimat.repositories.ApplicationRepository;
 import ru.rahimyanov_aleks.KFClimat.services.interfaces.IApplicationService;
 
@@ -49,5 +50,11 @@ public class ApplicationService implements IApplicationService {
     @Transactional
     public List<Application> getAllApplications() {
         return applicationRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public List<Application> getAllApplicationForClient(Client client) {
+        return applicationRepository.findAllByClient(client);
     }
 }

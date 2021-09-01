@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main-fragment (title, otherStaticResources, header, nav, mainContent, footer)">
+<head>
+  <meta charset="UTF-8" />
+  <title th:replace="${title}">Title</title>
+
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" href="../../static/css/styles.css"/>
+
+  <th:block th:replace="(${otherStaticResources} ?: '')"></th:block>
+
+</head>
+<body>
+<header th:insert="(${header} ?: '')">Header</header>
+
+<section>
+  <nav th:insert="(${nav} ?: '')">Menu</nav>
+
+  <article th:insert="(${mainContent} ?: '')">Content</article>
+</section>
+
+<footer th:insert="(${footer} ?: '')">Footer</footer>
+
+
+</body>
+</html>

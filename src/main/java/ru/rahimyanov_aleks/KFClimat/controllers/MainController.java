@@ -31,15 +31,20 @@ public class MainController {
         if (session.isTypeLogin()== TypeLoginForSession.Client){
             Client client = clientService.getClient(session.getId());
             view.addObject("name",String.format(("%s %s %s"), client.getSurname(), client.getName(), client.getPatronymic()));
-            view.setViewName("client_panel");
+            view.addObject("isTypeUser", "client");
+            view.addObject("my_title", "Панель клиенте");
+            view.setViewName("home");
         }else if (session.isTypeLogin()== TypeLoginForSession.Master){
             Master master = masterService.getMaster(session.getId());
             view.addObject("name",String.format(("%s %s %s"), master.getSurname(), master.getName(), master.getPatronymic()));
-            view.setViewName("master_panel");
+            view.addObject("isTypeUser", "master");
+            view.addObject("my_title", "Панель мастера");
+            view.setViewName("home");
         } else {
             view.setViewName("index");
         }
 
         return view;
     }
+
 }

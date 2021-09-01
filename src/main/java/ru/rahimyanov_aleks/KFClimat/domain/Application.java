@@ -23,8 +23,8 @@ public class Application {
     @Column(name = "HOUSE", nullable = false)
     private String house;
 
-    @Column(name = "N_KV")
-    private Long nKv;
+    @Column(name = "apartment")
+    private Long apartment;
 
     @Column(name = "DESCRIPTION")
     private String description;
@@ -46,11 +46,11 @@ public class Application {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Application that = (Application) o;
-        return id.equals(that.id) && city.equals(that.city) && street.equals(that.street) && house.equals(that.house) && Objects.equals(nKv, that.nKv) && Objects.equals(description, that.description) && client.equals(that.client) && type.equals(that.type) && power.equals(that.power);
+        return id.equals(that.id) && city.equals(that.city) && street.equals(that.street) && house.equals(that.house) && Objects.equals(apartment, that.apartment) && Objects.equals(description, that.description) && client.equals(that.client) && type.equals(that.type) && power.equals(that.power);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, city, street, house, nKv, description, client, type, power);
+        return Objects.hash(id, city, street, house, apartment, description, client, type, power);
     }
 }

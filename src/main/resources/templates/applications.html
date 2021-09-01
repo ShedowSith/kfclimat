@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #applications-static-resources},
+                                                ~{:: #applications-header},
+                                                ~{:: #applications-nav},
+                                                ~{:: #applications-main-content},
+                                                ~{:: #applications-footer}
+                                               )">
+
+<head>
+    <title>Мои заявки</title>
+
+    <th:block id="applications-static-resources">
+
+        <!--    <script type="text/javascript" src="../static/home.js" th:src="@{/home.js}"></script>-->
+        <!--    <link rel="stylesheet" type="text/css" href="../static/home.css" th:href="@{/home.css}"/>-->
+
+    </th:block>
+
+</head>
+<body>
+
+<div id="applications-header">
+    <span th:text="${name}"></span><a th:href="@{/exit}">Выход</a>
+
+</div>
+
+<div id="applications-nav" th:replace="(${isTypeUser} == 'client' ? ~{/fragments/app-fragments :: nav-client} : ~{/fragments/app-fragments :: nav-master}) ">
+</div>
+
+<div id="applications-main-content">
+    <h2>Мои заявки</h2>
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Адрес</th>
+            <th>Тип</th>
+            <th>Мощность</th>
+            <th>Описание</th>
+        </tr>
+
+        <tr th:each="app, state : ${applications}"
+            class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
+
+            <td th:utext="${state.count}">No</td>
+            <td th:utext="${app.city +' '+ app.street +' '+ app.house + (app.apartment == null ? '' : ', '+ app.apartment)}">Адрес</td>
+            <td th:utext="${app.type.name}">type</td>
+            <td th:utext="${app.power.power}">power</td>
+            <td th:utext="${app.description}">description</td>
+
+        </tr>
+
+    </table>
+</div>
+
+
+<div id="applications-footer" th:replace="/fragments/app-fragments :: footer"></div>
+
+
+</body>
+</html>
