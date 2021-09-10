@@ -12,7 +12,7 @@
                                                )">
 
 <head>
-  <title>Заявка</title>
+  <title>Подать заявку</title>
 
   <th:block id="application-static-resources">
 
@@ -34,13 +34,16 @@
 </div>
 
 <div id="application-main-content">
-  <h2>Заявка</h2>
-  <p>Адрес: <span th:utext="${app.city +' '+ app.street +' '+ app.house + (app.apartment == null ? '' : ', '+ app.apartment)}"></span></p>
-  <p>Тип заявки: <span  th:utext="${app.type.name}" ></span></p>
-  <p>Мощность кондиционера: <span  th:utext="${app.power.power}" ></span></p>
-  <p>Описание: <span  th:utext="${app.description}" ></span></p>
+  <h2>Форма отклика на заявку</h2>
+  <form id="form_application" action="#" th:action="@{'/master/application/'+${id_app}+'/response'}" th:object="${response}" method="POST">
+    <p>Цена:<input type="text" th:field="*{price}" size="15" maxlength="30"></p>
+    <p>Дата исполнения:
+      <input type="date" th:value="*{date}" th:field="*{date}"/>
+    </p>
 
-  <div id="button" th:replace="(${isTypeUser} == 'client' ? ~{/fragments/app-fragments :: button-application-client(${app.id})} : ~{/fragments/app-fragments :: button-application-master(${app.id})}) "></div>
+
+    <input type="submit" name="Откликнутся">
+  </form>
 </div>
 
 

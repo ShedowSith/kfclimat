@@ -24,10 +24,10 @@ public class Master {
     @Column(name = "PATRONYMIC")
     private String patronymic;
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "PASSWORD", unique = true, nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     @Column(name = "BRIGADE", unique = true, nullable = false)
@@ -35,6 +35,9 @@ public class Master {
 
     @Column(name = "DESCRIPTIONS")
     private String descriptions;
+
+    @Column(name = "TELEPHONE")
+    private String telephone;
 
     @OneToMany(mappedBy = "master", fetch = FetchType.EAGER)
     private Collection<Response> responses;
@@ -50,5 +53,20 @@ public class Master {
     @Override
     public int hashCode() {
         return Objects.hash(id, surname, name, patronymic, email, password, brigade, descriptions);
+    }
+
+    @Override
+    public String toString() {
+        return "Master{" +
+                "id=" + id +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", brigade='" + brigade + '\'' +
+                ", descriptions='" + descriptions + '\'' +
+                ", responses=" + responses +
+                '}';
     }
 }

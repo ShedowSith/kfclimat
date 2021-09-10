@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rahimyanov_aleks.KFClimat.domain.Application;
 import ru.rahimyanov_aleks.KFClimat.domain.Client;
+import ru.rahimyanov_aleks.KFClimat.domain.Master;
+import ru.rahimyanov_aleks.KFClimat.domain.State;
 import ru.rahimyanov_aleks.KFClimat.repositories.ApplicationRepository;
 import ru.rahimyanov_aleks.KFClimat.services.interfaces.IApplicationService;
 
@@ -53,8 +55,36 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
+    public Application updateStateApplication(Long id, State state) {
+        Optional<Application> optionalApplication = applicationRepository.findById(id);
+        if (optionalApplication.isPresent()){
+            Application application = optionalApplication.get();
+            application.setState(state);
+            applicationRepository.save(application);
+            return application;
+        }
+        return null;
+    }
+
+    @Override
     @Transactional
     public List<Application> getAllApplicationForClient(Client client) {
         return applicationRepository.findAllByClient(client);
     }
+
+    @Override
+    public Application getApplicationResponseMaster(Long id, Master master) {
+        Optional<Application> optionalApplication = applicationRepository.findByAppForMasterAndAppId(master, id);
+        if (optionalApplication.isPresent()){
+            return optionalApplication.get();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Application> getAllAppNotResponseMaster(Long id) {
+        return applicationRepository.findAllAppForNoResponseMaster_ID(id);
+    }
+
+
 }

@@ -50,3 +50,9 @@ footer {
         height: auto;
     }
 }
+
+.app-row:hover {
+    background: #48c0f3; /* Цвет фона при наведении */
+    color: #fff; /* Цвет текста при наведении */
+    cursor: pointer;
+}

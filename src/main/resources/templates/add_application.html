@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #application-static-resources},
+                                                ~{:: #application-header},
+                                                ~{:: #application-nav},
+                                                ~{:: #application-main-content},
+                                                ~{:: #application-footer}
+                                               )">
+
+<head>
+    <title>Подать заявку</title>
+
+    <th:block id="application-static-resources">
+
+        <!--    <script type="text/javascript" src="../static/home.js" th:src="@{/home.js}"></script>-->
+        <!--    <link rel="stylesheet" type="text/css" href="../static/home.css" th:href="@{/home.css}"/>-->
+
+    </th:block>
+
+</head>
+<body>
+
+<div id="application-header">
+    <span th:text="${name}"></span><a th:href="@{/exit}">Выход</a>
+
+</div>
+
+<div id="application-nav" th:replace="(${isTypeUser} == 'client' ? ~{/fragments/app-fragments :: nav-client} : ~{/fragments/app-fragments :: nav-master}) ">
+    Home Nav
+</div>
+
+<div id="application-main-content">
+    <h2>Форма подачи заявки</h2>
+    <form id="form_application" action="#" th:action="@{/client/application}" th:object="${app}" method="POST">
+        <p>Город:<input type="text" th:field="*{city}" size="15" maxlength="30"></p>
+        <p>Улица:<input type="text"  th:field="*{street}" size="15" maxlength="30"></p>
+        <p>Дом:<input type="text"  th:field="*{house}" size="15" maxlength="30"></p>
+        <p>Квартира №: <input type="text"  th:field="*{apartment}" size="15" maxlength="30"></p>
+        <p>
+            <div class="">Тип заявки:
+                <select class="" th:field="${app.type.id}" >
+                    <option th:each="type:${types}" th:value="${type.id}" th:text="${type.getName()}"></option>
+                </select>
+            </div>
+        </p>
+        <p>
+            <div class="">Мощность кондиционера:
+                <select class="" th:field="${app.power.id}" >
+                    <option th:each="power:${powers}" th:value="${power.id}" th:text="${power.getPower()}"></option>
+                </select>
+            </div>
+        </p>
+        <p>Описание: <input type="text"  th:field="*{description}" size="15" maxlength="30"></p>
+
+        <input type="submit">
+    </form>
+</div>
+
+
+<div id="application-footer" th:replace="/fragments/app-fragments :: footer"></div>
+
+
+</body>
+</html>

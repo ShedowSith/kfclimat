@@ -10,7 +10,7 @@
     <p>Кто вы?</p>
     <div th:each="type : ${T(ru.rahimyanov_aleks.KFClimat.pojo.TypeLogin).values()}">
         <div>
-            <input type="radio" th:field="*{typeLogin}" th:value="${type}" class="custom-control-input">
+            <input type="radio" th:field="*{typeLogin}" th:value="${type}">
             <label th:for="${#ids.prev('typeLogin')}" th:text="${type.getDisplayValue()}"></label>
         </div>
     </div>

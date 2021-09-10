@@ -40,6 +40,8 @@
   <p>Мощность кондиционера: <span  th:utext="${app.power.power}" ></span></p>
   <p>Описание: <span  th:utext="${app.description}" ></span></p>
 
+  <div th:if="${response} != null" th:replace="~{/fragments/app-fragments :: executor(${response.master.brigade}, ${response.price}, ${response.date}, ${response.master.telephone})}"></div>
+
   <div id="button" th:replace="(${isTypeUser} == 'client' ? ~{/fragments/app-fragments :: button-application-client(${app.id})} : ~{/fragments/app-fragments :: button-application-master(${app.id})}) "></div>
 </div>
 

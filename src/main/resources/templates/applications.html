@@ -12,7 +12,7 @@
                                                )">
 
 <head>
-    <title>Мои заявки</title>
+    <title>Заявки</title>
 
     <th:block id="applications-static-resources">
 
@@ -33,7 +33,7 @@
 </div>
 
 <div id="applications-main-content">
-    <h2>Мои заявки</h2>
+    <h2 th:text="(${isTypeUser} == 'client' ? 'Мои заявки' : 'Заявки')">Заявки</h2>
     <table>
         <tr>
             <th>No</th>
@@ -44,7 +44,11 @@
         </tr>
 
         <tr th:each="app, state : ${applications}"
-            class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
+            th:class="app-row"
+
+            th:href="@{'/'+${(isTypeUser == 'client') ? 'client' : 'master'}+'/application/'+${app.id}}"
+            onclick="window.location.href = this.getAttribute('href')"
+        >
 
             <td th:utext="${state.count}">No</td>
             <td th:utext="${app.city +' '+ app.street +' '+ app.house + (app.apartment == null ? '' : ', '+ app.apartment)}">Адрес</td>
@@ -63,3 +67,5 @@
 
 </body>
 </html>
+
+<!--th:classappend="${state.odd} ? 'odd-row' : 'even-row'"-->

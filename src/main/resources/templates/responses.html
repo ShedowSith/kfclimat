@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #response-static-resources},
+                                                ~{:: #response-header},
+                                                ~{:: #response-nav},
+                                                ~{:: #response-main-content},
+                                                ~{:: #response-footer}
+                                               )">
+
+<head>
+  <title>Подать заявку</title>
+
+  <th:block id="response-static-resources">
+
+    <!--    <script type="text/javascript" src="../static/home.js" th:src="@{/home.js}"></script>-->
+    <!--    <link rel="stylesheet" type="text/css" href="../static/home.css" th:href="@{/home.css}"/>-->
+
+  </th:block>
+
+</head>
+<body>
+
+<div id="response-header">
+  <span th:text="${name}"></span><a th:href="@{/exit}">Выход</a>
+
+</div>
+
+<div id="response-nav" th:replace="(${isTypeUser} == 'client' ? ~{/fragments/app-fragments :: nav-client} : ~{/fragments/app-fragments :: nav-master}) ">
+  Home Nav
+</div>
+
+<div id="response-main-content">
+  <h2>Мои заявки</h2>
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Адрес</th>
+      <th>Тип</th>
+      <th>Мощность</th>
+      <th>Описание</th>
+    </tr>
+
+    <tr th:each="res, state : ${responses}"
+        th:class="app-row"
+
+        th:href="@{'/'+${(isTypeUser == 'client') ? 'client' : 'master'}+'/application/'+${res.application.id}}"
+        onclick="window.location.href = this.getAttribute('href')"
+    >
+
+      <td th:utext="${state.count}">No</td>
+      <td th:utext="${res.application.city +' '+ res.application.street +' '+ res.application.house + (res.application.apartment == null ? '' : ', '+ res.application.apartment)}">Адрес</td>
+      <td th:utext="${res.application.type.name}">type</td>
+      <td th:utext="${res.application.power.power}">power</td>
+      <td th:utext="${res.application.description}">description</td>
+
+    </tr>
+
+  </table>
+</div>
+
+
+<div id="response-footer" th:replace="/fragments/app-fragments :: footer"></div>
+
+
+</body>
+</html>

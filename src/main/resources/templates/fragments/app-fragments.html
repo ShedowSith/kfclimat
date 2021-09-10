@@ -28,6 +28,26 @@
 </ul>
 
 
+<!-- Master button application -->
+<ul th:fragment = "button-application-master(id)">
+    <li><a th:href="@{'/master/application/'+${id}+'/response'}">Откликнутся</a></li>
+    <li><a th:href="@{'/master/application/'+${id}+'/completion'}">Завершить</a></li>
+</ul>
+
+<!-- Client button application -->
+<ul th:fragment = "button-application-client(id)">
+    <li><a th:href="@{'/client/application/'+${id}+'/responses'}">Выбрать исполнителя</a></li>
+    <li><a th:href="@{'/client/application/'+${id}+'/completion'}">Завершить</a></li>
+</ul>
+
+<div th:fragment="executor(brigade, price, date, tel)">
+    <p>Исполнитель:</p>
+    <p>Название бригады: <span  th:utext="${brigade}"></span></p>
+    <p>Номер телефона: <span  th:utext="${tel}" ></span></p>
+    <p>Цена: <span  th:utext="${price}" ></span></p>
+    <p>Дата исполнения: <span  th:utext="${date}" ></span></p>
+</div>
+
 <div th:fragment="footer">
     &copy;2021 Моя почта - rahimyanov_aleks@mail.ru
 </div>

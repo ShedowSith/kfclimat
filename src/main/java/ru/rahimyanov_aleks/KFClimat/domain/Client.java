@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Data
 @Entity
-@Table(name = "Client")
+@Table(name = "CLIENTS")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,6 +30,9 @@ public class Client {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
+    @Column(name = "TELEPHONE")
+    private String telephone;
+
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Collection<Application> applications;
 
@@ -44,5 +47,18 @@ public class Client {
     @Override
     public int hashCode() {
         return Objects.hash(id, surname, name, patronymic, email, password);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", applications=" + applications +
+                '}';
     }
 }

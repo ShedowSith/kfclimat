@@ -1,0 +1,3 @@
+insert into types (id, name) values (1, 'Установка'), (2, 'Чистка'), (3, 'Ремонт'), (4, 'Покладка трассы на этапе ремонта') ON CONFLICT (id) DO NOTHING;
+insert into powers (id, power) values (1, 7), (2, 9), (3, 12), (4, 18), (5, 24), (6, 30), (7, 36) ON CONFLICT (id) DO NOTHING;
+insert into states (id, name) values (1, 'Поиск'), (2, 'Выполнение'), (3, 'Завершено'), (4, 'Отменено') ON CONFLICT (id) DO NOTHING;

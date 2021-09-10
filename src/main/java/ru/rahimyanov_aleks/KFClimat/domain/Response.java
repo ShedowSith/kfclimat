@@ -1,6 +1,8 @@
 package ru.rahimyanov_aleks.KFClimat.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +10,7 @@ import java.util.Objects;
 
 @Data
 @Entity(name = "RESPONSES")
+@DynamicInsert
 public class Response {
 
     @Id
@@ -18,6 +21,7 @@ public class Response {
     @Column(name = "PRICE", nullable = false)
     private Integer price;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "DATE", nullable = false)
     private Date date;
 
@@ -25,8 +29,11 @@ public class Response {
     @JoinColumn(name = "MASTER_ID")
     private Master master;
 
+    @Column(name = "SELECTED", nullable = false, columnDefinition = "boolean default false")
+    private boolean selected;
+
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "APPLICATION_AD")
+    @JoinColumn(name = "APPLICATION_ID")
     private Application application;
 
     @Override
@@ -40,5 +47,16 @@ public class Response {
     @Override
     public int hashCode() {
         return Objects.hash(id, price, date, master, application);
+    }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "id=" + id +
+                ", price=" + price +
+                ", date=" + date +
+                ", master=" + master +
+                ", application=" + application +
+                '}';
     }
 }

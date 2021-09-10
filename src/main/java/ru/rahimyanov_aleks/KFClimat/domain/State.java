@@ -7,38 +7,38 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Data
-@Entity(name = "Powers")
-public class Power {
+@Entity(name = "STATES")
+public class State {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "POWER", nullable = false)
-    private Short power;
+    @Column(name = "NAME", nullable = false)
+    private String name;
 
-    @OneToMany(mappedBy = "power", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
     private Collection<Application> applications;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Power power1 = (Power) o;
-        return id.equals(power1.id) && power.equals(power1.power);
+        State state = (State) o;
+        return id.equals(state.id) && name.equals(state.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, power);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
-        return "Power{" +
+        return "State{" +
                 "id=" + id +
-                ", power=" + power +
+                ", name='" + name + '\'' +
                 ", applications=" + applications +
                 '}';
     }

@@ -3,6 +3,7 @@ package ru.rahimyanov_aleks.KFClimat.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Data
@@ -23,7 +24,7 @@ public class Application {
     @Column(name = "HOUSE", nullable = false)
     private String house;
 
-    @Column(name = "apartment")
+    @Column(name = "APARTMENT")
     private Long apartment;
 
     @Column(name = "DESCRIPTION")
@@ -41,6 +42,13 @@ public class Application {
     @JoinColumn(name = "POWER_ID")
     private Power power;
 
+    @OneToMany(mappedBy = "application", fetch = FetchType.EAGER)
+    private Collection<Response> responses;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "STATE_ID")
+    private State state;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,5 +60,20 @@ public class Application {
     @Override
     public int hashCode() {
         return Objects.hash(id, city, street, house, apartment, description, client, type, power);
+    }
+
+    @Override
+    public String toString() {
+        return "Application{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", house='" + house + '\'' +
+                ", apartment=" + apartment +
+                ", description='" + description + '\'' +
+                ", client=" + client +
+                ", type=" + type +
+                ", power=" + power +
+                '}';
     }
 }
